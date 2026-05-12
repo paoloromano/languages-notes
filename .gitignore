@@ -1,0 +1,52 @@
+# Laravel
+/vendor
+/node_modules
+public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/storage/debugbar
+/storage/clockwork
+/bootstrap/ssr
+Homestead.json
+Homestead.yaml
+auth.json
+
+# Env
+.env
+.env.backup
+.env.production
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Cache & build
+.phpunit.result.cache
+/.phpunit.cache
+
+# IDE / editors
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+.phpactor.json
+*.swp
+*.swo
+*~
+
+# Laravel IDE Helper
+_ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
+
+# OS
+.DS_Store
+Thumbs.db
