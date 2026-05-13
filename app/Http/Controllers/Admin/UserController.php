@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -41,6 +44,35 @@ class UserController extends Controller
             'users' => $users,
             'filter' => $filter,
         ]);
+    }
+
+    public function create(): Response
+    {
+        return Inertia::render('Admin/Users/Create', [
+            'roles' => Role::query()->orderBy('name')->pluck('name')->values()->all(),
+        ]);
+    }
+
+    public function store(StoreUserRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        $user->forceFill([
+            'email_verified_at' => now(),
+            'approved_at' => now(),
+        ])->save();
+
+        $user->syncRoles([$validated['role']]);
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with('success', __('admin.user_created'));
     }
 
     public function approve(User $user): RedirectResponse

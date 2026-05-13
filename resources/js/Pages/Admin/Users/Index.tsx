@@ -60,31 +60,36 @@ export default function AdminUsersIndex({ users, filter }: PageProps<IndexProps>
                 </div>
             ) : null}
 
-            <div className="mb-4 flex flex-wrap items-center gap-2">
-                <span className="text-sm text-default-500">Filtro:</span>
-                <Button
-                    size="sm"
-                    variant={filter === 'all' ? 'solid' : 'flat'}
-                    color={filter === 'all' ? 'primary' : 'default'}
-                    onPress={() => setFilter('all')}
-                >
-                    Tutti
-                </Button>
-                <Button
-                    size="sm"
-                    variant={filter === 'pending' ? 'solid' : 'flat'}
-                    color={filter === 'pending' ? 'primary' : 'default'}
-                    onPress={() => setFilter('pending')}
-                >
-                    In attesa
-                </Button>
-                <Button
-                    size="sm"
-                    variant={filter === 'approved' ? 'solid' : 'flat'}
-                    color={filter === 'approved' ? 'primary' : 'default'}
-                    onPress={() => setFilter('approved')}
-                >
-                    Approvati
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-sm text-default-500">Filtro:</span>
+                    <Button
+                        size="sm"
+                        variant={filter === 'all' ? 'solid' : 'flat'}
+                        color={filter === 'all' ? 'primary' : 'default'}
+                        onPress={() => setFilter('all')}
+                    >
+                        Tutti
+                    </Button>
+                    <Button
+                        size="sm"
+                        variant={filter === 'pending' ? 'solid' : 'flat'}
+                        color={filter === 'pending' ? 'primary' : 'default'}
+                        onPress={() => setFilter('pending')}
+                    >
+                        In attesa
+                    </Button>
+                    <Button
+                        size="sm"
+                        variant={filter === 'approved' ? 'solid' : 'flat'}
+                        color={filter === 'approved' ? 'primary' : 'default'}
+                        onPress={() => setFilter('approved')}
+                    >
+                        Approvati
+                    </Button>
+                </div>
+                <Button as={Link} href={route('admin.users.create')} color="primary" size="sm">
+                    Nuovo utente
                 </Button>
             </div>
 

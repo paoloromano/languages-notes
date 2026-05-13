@@ -49,6 +49,8 @@ Route::middleware(['auth', 'verified', 'approved', 'role:admin'])
     ->group(function () {
         Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::get('users', [AdminUserController::class, 'index'])->name('users.index');
+        Route::get('users/create', [AdminUserController::class, 'create'])->name('users.create');
+        Route::post('users', [AdminUserController::class, 'store'])->name('users.store');
         Route::post('users/{user}/approve', [AdminUserController::class, 'approve'])
             ->name('users.approve');
         Route::get('roles', [AdminRoleController::class, 'index'])->name('roles.index');
