@@ -84,7 +84,7 @@ export default function AdminLayout({ children, header }: PropsWithChildren<Prop
                 }`}
             >
                 <div className="flex h-16 items-center gap-2 border-b border-divider px-4">
-                    <ApplicationLogo className="h-7 w-7 fill-current text-primary" />
+                    <ApplicationLogo variant="icon" />
                     <span className="font-semibold">Admin</span>
                 </div>
                 <nav className="flex flex-col gap-1 p-3">

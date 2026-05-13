@@ -11,8 +11,8 @@ export default function GuestLayout({ children }: PropsWithChildren) {
                 <ThemeToggle />
             </div>
 
-            <Link href="/" className="mb-6">
-                <ApplicationLogo className="h-16 w-16 fill-current text-default-600" />
+            <Link href="/" className="mb-8 block transition-opacity hover:opacity-90">
+                <ApplicationLogo variant="hero" />
             </Link>
 
             <Card className="w-full max-w-md">

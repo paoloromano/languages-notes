@@ -60,9 +60,8 @@ export default function UserLayout({ children, header }: PropsWithChildren<Props
                 </NavbarContent>
 
                 <NavbarBrand>
-                    <Link href="/dashboard" className="flex items-center gap-2">
-                        <ApplicationLogo className="h-8 w-8 fill-current text-primary" />
-                        <span className="font-semibold">App Base</span>
+                    <Link href="/dashboard" className="flex min-w-0 items-center">
+                        <ApplicationLogo variant="compact" />
                     </Link>
                 </NavbarBrand>
 
