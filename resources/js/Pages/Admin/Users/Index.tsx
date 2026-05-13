@@ -25,12 +25,10 @@ interface AdminUserRow {
 interface PaginatedUsers {
     data: AdminUserRow[];
     links: { url: string | null; label: string; active: boolean }[];
-    meta: {
-        current_page: number;
-        last_page: number;
-        per_page: number;
-        total: number;
-    };
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
 }
 
 type IndexProps = {
@@ -40,6 +38,10 @@ type IndexProps = {
 
 export default function AdminUsersIndex({ users, filter }: PageProps<IndexProps>) {
     const { flash } = usePage<PageProps>().props;
+
+    const rows = users?.data ?? [];
+    const lastPage = users?.last_page ?? 1;
+    const currentPage = users?.current_page ?? 1;
 
     const setFilter = (stato: IndexProps['filter']) => {
         router.get(route('admin.users.index'), { stato: stato === 'all' ? undefined : stato }, {
@@ -95,7 +97,7 @@ export default function AdminUsersIndex({ users, filter }: PageProps<IndexProps>
                     <TableColumn align="end">Azioni</TableColumn>
                 </TableHeader>
                 <TableBody emptyContent="Nessun utente">
-                    {users.data.map((u) => (
+                    {rows.map((u) => (
                         <TableRow key={u.id}>
                             <TableCell>{u.name}</TableCell>
                             <TableCell>{u.email}</TableCell>
@@ -139,11 +141,11 @@ export default function AdminUsersIndex({ users, filter }: PageProps<IndexProps>
                 </TableBody>
             </Table>
 
-            {users.meta.last_page > 1 ? (
+            {lastPage > 1 ? (
                 <div className="mt-6 flex justify-center">
                     <Pagination
-                        total={users.meta.last_page}
-                        page={users.meta.current_page}
+                        total={lastPage}
+                        page={currentPage}
                         onChange={(page) =>
                             router.get(route('admin.users.index'), {
                                 page,

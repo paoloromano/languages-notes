@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\LinguaController;
 use App\Http\Controllers\ProfileController;
@@ -50,6 +51,7 @@ Route::middleware(['auth', 'verified', 'approved', 'role:admin'])
         Route::get('users', [AdminUserController::class, 'index'])->name('users.index');
         Route::post('users/{user}/approve', [AdminUserController::class, 'approve'])
             ->name('users.approve');
+        Route::get('roles', [AdminRoleController::class, 'index'])->name('roles.index');
     });
 
 require __DIR__.'/auth.php';
