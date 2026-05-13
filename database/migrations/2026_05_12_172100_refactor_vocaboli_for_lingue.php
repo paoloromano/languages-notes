@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -10,10 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        $existingIndexes = collect(DB::select('SHOW INDEX FROM vocaboli'))
-            ->pluck('Key_name')
-            ->unique()
-            ->all();
+        $existingIndexes = Schema::getIndexListing('vocaboli');
 
         // Garantisco un indice singolo su user_id così la FK non blocca
         // il drop degli indici composti (user_id, english/italian).

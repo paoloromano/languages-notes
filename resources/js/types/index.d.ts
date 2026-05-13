@@ -13,6 +13,7 @@ export type PageProps<
     auth: {
         user: User;
     };
+    errors?: Record<string, string>;
     flash: {
         success?: string;
         error?: string;

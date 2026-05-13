@@ -1,5 +1,6 @@
 import GuestLayout from '@/Layouts/GuestLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { PageProps } from '@/types';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { Button, Checkbox, Input } from '@heroui/react';
 import { FormEventHandler } from 'react';
 
@@ -10,6 +11,9 @@ export default function Login({
     status?: string;
     canResetPassword: boolean;
 }) {
+    const page = usePage<PageProps>();
+    const pageErrors = page.props.errors ?? {};
+
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -46,8 +50,8 @@ export default function Login({
                     isRequired
                     value={data.email}
                     onValueChange={(v) => setData('email', v)}
-                    isInvalid={!!errors.email}
-                    errorMessage={errors.email}
+                    isInvalid={!!(errors.email || pageErrors.email)}
+                    errorMessage={errors.email || pageErrors.email}
                 />
 
                 <Input

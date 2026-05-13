@@ -50,6 +50,15 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        $user = Auth::user();
+        if ($user !== null && ! $user->isApproved()) {
+            Auth::guard('web')->logout();
+
+            throw ValidationException::withMessages([
+                'email' => trans('auth.pending_approval'),
+            ]);
+        }
+
         RateLimiter::clear($this->throttleKey());
     }
 

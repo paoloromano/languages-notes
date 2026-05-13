@@ -7,6 +7,7 @@ interface Stats {
     users_total: number;
     users_admin: number;
     users_user: number;
+    users_pending: number;
 }
 
 export default function AdminDashboard({ stats }: PageProps<{ stats: Stats }>) {
@@ -16,11 +17,17 @@ export default function AdminDashboard({ stats }: PageProps<{ stats: Stats }>) {
         >
             <Head title="Admin · Dashboard" />
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <Card>
                     <CardHeader className="text-default-500">Utenti totali</CardHeader>
                     <CardBody>
                         <p className="text-3xl font-bold">{stats.users_total}</p>
+                    </CardBody>
+                </Card>
+                <Card>
+                    <CardHeader className="text-default-500">In attesa di approvazione</CardHeader>
+                    <CardBody>
+                        <p className="text-3xl font-bold">{stats.users_pending}</p>
                     </CardBody>
                 </Card>
                 <Card>

@@ -16,6 +16,7 @@ class DashboardController extends Controller
                 'users_total' => User::count(),
                 'users_admin' => User::role('admin')->count(),
                 'users_user' => User::role('user')->count(),
+                'users_pending' => User::whereNull('approved_at')->count(),
             ],
         ]);
     }
